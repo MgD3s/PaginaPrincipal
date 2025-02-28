@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dangerous Space</title>
+    <title>Mi Aplicación</title>
     
     <!-- Favicon -->
-    <link rel="icon" href="google.png" type="image/png">
+    <link rel="icon" href="logo.png" type="image/png">
 
     <style>
         body {
@@ -33,23 +33,15 @@
         .download-section {
             margin-top: 30px;
         }
+        /* Eliminamos el recuadro del botón */
         .play-store-btn {
             display: inline-block;
             margin-top: 20px;
-            background-color: #34b7f1;
-            color: white;
-            font-size: 16px;
-            padding: 12px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        .play-store-btn:hover {
-            background-color: #0288d1;
+            text-decoration: none; /* Eliminamos subrayado */
         }
         /* Ajustamos la imagen del logo de Google Play */
         .play-store-btn img {
-            width: 160px; /* Tamaño del logo */
+            width: 160px; /* Tamaño de la imagen */
             height: auto; /* Mantener proporciones */
         }
     </style>
@@ -73,6 +65,7 @@
 <!-- Sección de descarga -->
 <div class="download-section">
     <p>Descárgala en:</p>
+    <!-- Botón sin recuadro, solo la imagen -->
     <a href="https://play.google.com/store/apps/details?id=com.MD3.dangerousspace" class="play-store-btn" target="_blank">
         <img src="google.png" alt="Google Play">
     </a>
@@ -80,4 +73,5 @@
 
 </body>
 </html>
+
 
