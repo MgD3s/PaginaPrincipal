@@ -78,6 +78,61 @@
             width: 100%;
             height: auto;
             border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .gallery-item img:hover {
+            opacity: 0.7;
+        }
+
+        /* Estilo para la imagen expandida */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+        .lightbox-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1010;
+        }
+        .lightbox-prev {
+            left: 10px;
+        }
+        .lightbox-next {
+            right: 10px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        .lightbox-close:hover {
+            background-color: #ff6600;
         }
 
         .socials {
@@ -159,30 +214,38 @@
     <h2>Capturas de Pantalla</h2>
     <div class="gallery-items">
         <div class="gallery-item">
-            <img src="Captura1.jpg" alt="Captura de pantalla 1">
+            <img src="Captura1.jpg" alt="Captura de pantalla 1" onclick="openLightbox(0)">
         </div>
         <div class="gallery-item">
-            <img src="Captura2.jpg" alt="Captura de pantalla 2">
+            <img src="Captura2.jpg" alt="Captura de pantalla 2" onclick="openLightbox(1)">
         </div>
         <div class="gallery-item">
-            <img src="Captura3.jpg" alt="Captura de pantalla 3">
+            <img src="Captura3.jpg" alt="Captura de pantalla 3" onclick="openLightbox(2)">
         </div>
         <div class="gallery-item">
-            <img src="Captura4.jpg" alt="Captura de pantalla 4">
+            <img src="Captura4.jpg" alt="Captura de pantalla 4" onclick="openLightbox(3)">
         </div>
         <div class="gallery-item">
-            <img src="Captura5.jpg" alt="Captura de pantalla 5">
+            <img src="Captura5.jpg" alt="Captura de pantalla 5" onclick="openLightbox(4)">
         </div>
         <div class="gallery-item">
-            <img src="Captura6.jpg" alt="Captura de pantalla 6">
+            <img src="Captura6.jpg" alt="Captura de pantalla 6" onclick="openLightbox(5)">
         </div>
         <div class="gallery-item">
-            <img src="Captura7.jpg" alt="Captura de pantalla 7">
+            <img src="Captura7.jpg" alt="Captura de pantalla 7" onclick="openLightbox(6)">
         </div>
         <div class="gallery-item">
-            <img src="Captura8.jpg" alt="Captura de pantalla 8">
+            <img src="Captura8.jpg" alt="Captura de pantalla 8" onclick="openLightbox(7)">
         </div>
     </div>
+</div>
+
+<!-- Lightbox para la imagen ampliada -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-button lightbox-prev" onclick="changeImage(-1)">&#10094;</button>
+    <img id="lightbox-img" src="" alt="Imagen ampliada">
+    <button class="lightbox-button lightbox-next" onclick="changeImage(1)">&#10095;</button>
+    <button class="lightbox-close" onclick="closeLightbox()">X</button>
 </div>
 
 <div class="socials">
@@ -198,6 +261,32 @@
     <a href="https://mgd3s.github.io/PaginaPrincipal/" class="btn">Página Principal del Desarrollador</a>
 </div>
 
+<script>
+    let currentIndex = 0; // Índice de la imagen actual
+    const images = [
+        'Captura1.jpg', 'Captura2.jpg', 'Captura3.jpg', 'Captura4.jpg', 
+        'Captura5.jpg', 'Captura6.jpg', 'Captura7.jpg', 'Captura8.jpg'
+    ];
+
+    function openLightbox(index) {
+        currentIndex = index;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        lightbox.style.display = 'flex';
+        lightboxImg.src = images[currentIndex];
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+    }
+
+    function changeImage(direction) {
+        currentIndex += direction;
+        if (currentIndex < 0) currentIndex = images.length - 1;
+        if (currentIndex >= images.length) currentIndex = 0;
+        document.getElementById('lightbox-img').src = images[currentIndex];
+    }
+</script>
+
 </body>
 </html>
-
