@@ -99,8 +99,8 @@
             z-index: 1000;
         }
         .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 95%;  /* Aumenté el tamaño de la imagen */
+            max-height: 95%;
             border-radius: 10px;
         }
         .lightbox-button {
@@ -124,15 +124,18 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: #ff4500;
+            background-color: transparent; /* Cambié el fondo a transparente */
             color: white;
             border: none;
-            font-size: 1.5rem;
-            padding: 10px 15px;
+            font-size: 2rem; /* Hice más grande el texto */
             cursor: pointer;
+            z-index: 1010;
         }
-        .lightbox-close:hover {
-            background-color: #ff6600;
+        .lightbox-prev, .lightbox-next, .lightbox-close {
+            transition: background-color 0.3s;
+        }
+        .lightbox-prev:hover, .lightbox-next:hover, .lightbox-close:hover {
+            background-color: rgba(255, 69, 0, 0.7); /* Color similar a los botones de navegación */
         }
 
         .socials {
