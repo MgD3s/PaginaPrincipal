@@ -79,63 +79,6 @@
             height: auto;
             border-radius: 8px;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .gallery-item img:hover {
-            opacity: 0.7;
-        }
-
-        /* Estilo para la imagen expandida */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .lightbox img {
-            max-width: 95%;  /* Aumenté el tamaño de la imagen */
-            max-height: 95%;
-            border-radius: 10px;
-        }
-        .lightbox-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 1010;
-        }
-        .lightbox-prev {
-            left: 10px;
-        }
-        .lightbox-next {
-            right: 10px;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: transparent; /* Cambié el fondo a transparente */
-            color: white;
-            border: none;
-            font-size: 2rem; /* Hice más grande el texto */
-            cursor: pointer;
-            z-index: 1010;
-        }
-        .lightbox-prev, .lightbox-next, .lightbox-close {
-            transition: background-color 0.3s;
-        }
-        .lightbox-prev:hover, .lightbox-next:hover, .lightbox-close:hover {
-            background-color: rgba(255, 69, 0, 0.7); /* Color similar a los botones de navegación */
         }
 
         .socials {
@@ -162,10 +105,14 @@
             color: #ff6600;
             background-color: #ddd;
         }
+
+        /* Estilos para el footer */
         .footer {
             margin-top: 30px;
+            padding-bottom: 20px;
+            text-align: center;
         }
-        .footer a {
+        .footer .btn {
             padding: 10px 20px;
             background-color: #ff6600;
             color: white;
@@ -175,8 +122,53 @@
             display: inline-block;
             margin: 10px;
         }
-        .footer a:hover {
+        .footer .btn:hover {
             background-color: #ff4500;
+        }
+
+        /* Estilos para la ventana emergente */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .expanded-image {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+            margin: 20px 0;
+        }
+        .overlay .close-btn, .overlay .prev-btn, .overlay .next-btn {
+            position: absolute;
+            top: 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 5px;
+        }
+        .overlay .close-btn {
+            right: 20px;
+            top: 20px;
+        }
+        .overlay .prev-btn {
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .overlay .next-btn {
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
         }
     </style>
 </head>
@@ -217,38 +209,30 @@
     <h2>Capturas de Pantalla</h2>
     <div class="gallery-items">
         <div class="gallery-item">
-            <img src="Captura1.jpg" alt="Captura de pantalla 1" onclick="openLightbox(0)">
+            <img src="Captura1.jpg" alt="Captura de pantalla 1" class="expandable">
         </div>
         <div class="gallery-item">
-            <img src="Captura2.jpg" alt="Captura de pantalla 2" onclick="openLightbox(1)">
+            <img src="Captura2.jpg" alt="Captura de pantalla 2" class="expandable">
         </div>
         <div class="gallery-item">
-            <img src="Captura3.jpg" alt="Captura de pantalla 3" onclick="openLightbox(2)">
+            <img src="Captura3.jpg" alt="Captura de pantalla 3" class="expandable">
         </div>
         <div class="gallery-item">
-            <img src="Captura4.jpg" alt="Captura de pantalla 4" onclick="openLightbox(3)">
+            <img src="Captura4.jpg" alt="Captura de pantalla 4" class="expandable">
         </div>
         <div class="gallery-item">
-            <img src="Captura5.jpg" alt="Captura de pantalla 5" onclick="openLightbox(4)">
+            <img src="Captura5.jpg" alt="Captura de pantalla 5" class="expandable">
         </div>
         <div class="gallery-item">
-            <img src="Captura6.jpg" alt="Captura de pantalla 6" onclick="openLightbox(5)">
+            <img src="Captura6.jpg" alt="Captura de pantalla 6" class="expandable">
         </div>
         <div class="gallery-item">
-            <img src="Captura7.jpg" alt="Captura de pantalla 7" onclick="openLightbox(6)">
+            <img src="Captura7.jpg" alt="Captura de pantalla 7" class="expandable">
         </div>
         <div class="gallery-item">
-            <img src="Captura8.jpg" alt="Captura de pantalla 8" onclick="openLightbox(7)">
+            <img src="Captura8.jpg" alt="Captura de pantalla 8" class="expandable">
         </div>
     </div>
-</div>
-
-<!-- Lightbox para la imagen ampliada -->
-<div class="lightbox" id="lightbox">
-    <button class="lightbox-button lightbox-prev" onclick="changeImage(-1)">&#10094;</button>
-    <img id="lightbox-img" src="" alt="Imagen ampliada">
-    <button class="lightbox-button lightbox-next" onclick="changeImage(1)">&#10095;</button>
-    <button class="lightbox-close" onclick="closeLightbox()">X</button>
 </div>
 
 <div class="socials">
@@ -264,30 +248,41 @@
     <a href="https://mgd3s.github.io/PaginaPrincipal/" class="btn">Página Principal del Desarrollador</a>
 </div>
 
-<script>
-    let currentIndex = 0; // Índice de la imagen actual
-    const images = [
-        'Captura1.jpg', 'Captura2.jpg', 'Captura3.jpg', 'Captura4.jpg', 
-        'Captura5.jpg', 'Captura6.jpg', 'Captura7.jpg', 'Captura8.jpg'
-    ];
+<!-- Overlay para la imagen expandida -->
+<div class="overlay" id="overlay">
+    <button class="close-btn" onclick="closeImage()">X</button>
+    <button class="prev-btn" onclick="changeImage(-1)">&#10094;</button>
+    <button class="next-btn" onclick="changeImage(1)">&#10095;</button>
+    <img src="" alt="Imagen expandida" id="expanded-img" class="expanded-image">
+</div>
 
-    function openLightbox(index) {
-        currentIndex = index;
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        lightbox.style.display = 'flex';
-        lightboxImg.src = images[currentIndex];
+<script>
+    let currentImageIndex = 0;
+    let images = document.querySelectorAll('.expandable');
+    let overlay = document.getElementById('overlay');
+    let expandedImg = document.getElementById('expanded-img');
+
+    images.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            currentImageIndex = index;
+            openImage(img.src);
+        });
+    });
+
+    function openImage(src) {
+        overlay.style.display = 'flex';
+        expandedImg.src = src;
     }
 
-    function closeLightbox() {
-        document.getElementById('lightbox').style.display = 'none';
+    function closeImage() {
+        overlay.style.display = 'none';
     }
 
     function changeImage(direction) {
-        currentIndex += direction;
-        if (currentIndex < 0) currentIndex = images.length - 1;
-        if (currentIndex >= images.length) currentIndex = 0;
-        document.getElementById('lightbox-img').src = images[currentIndex];
+        currentImageIndex += direction;
+        if (currentImageIndex < 0) currentImageIndex = images.length - 1;
+        if (currentImageIndex >= images.length) currentImageIndex = 0;
+        expandedImg.src = images[currentImageIndex].src;
     }
 </script>
 
